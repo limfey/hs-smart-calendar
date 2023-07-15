@@ -1,0 +1,75 @@
+<h5 id="description">Description</h5>
+<p>Now you can not only read data but also handle errors. Fine! But using the program, adding one note at a time, closing it, and restarting it, is extremely inconvenient! What if the user wants to add several notes at once, or delete some notes? Let's supplement your program by teaching it to ask the user how many notes they want to add or delete.</p>
+<p>Please note that the events in the files are removed before each test run for the tests to work correctly.</p>
+<h5 id="objectives">Objectives</h5>
+<p>You add new functions:</p>
+<ol>
+<li>Display all current notes after displaying the current date and time. If there are no current notes, skip this step.</li>
+<li>Ask the user how many notes they want to add or delete. Then you read the number. A positive number means that the user wants to add several notes, and negative means that the user decides to delete that many notes.</li>
+<li>To add notes, read the data and the text and save the result in a file.</li>
+<li>To delete a note, ask the user to enter the note's text and remove information from your file. If such a note is not found, you need to print an error message and ask again</li>
+<li>In the end, print all saved notes</li>
+</ol>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 20:33
+
+Let's change several notes in the calendar.
+How many notes do you want to add or delete? (enter a positive number to add or a negative to remove)
+&gt; 3
+
+Enter date and time of note #1 (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-20 18:00
+Enter text of note #1:
+&gt; Visit a doctor
+
+Enter date and time of note #2 (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-10 14:00
+Enter text of note #2:
+&gt; Meeting with business partners  
+
+Enter date and time of note #2 (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-12 14:00
+Enter text of note #2:
+&gt; Go to the cinema
+Notes added!
+
+ 
+Before the event note "Meeting with business partners" remains: 27 day(s), 17 hour(s) and 27 minute(s).
+Before the event note "Go to the cinema" remains: 29 day(s), 17 hour(s) and 27 minute(s).
+Before the event note "Visit a doctor" remains: 37 day(s), 21 hour(s) and 27 minute(s).</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-14 20:33
+
+Before the event note "Meeting with business partners" remains: 26 days, 17 hours and 27 minutes.
+Before the event note "Visit a doctor" remained: 36 days, 21 hours and 26 minutes.
+
+Let's change several notes in the calendar.
+How many notes do you want to add or delete? (enter a positive number to add or a negative to remove)
+&gt; -2
+
+Enter the text of the note you want to delete:
+&gt; Go to the gym
+No notes with such text were found. Try again:
+&gt; Visit a doctor
+
+Note deleted!
+
+Enter the text of the note you want to delete:
+&gt; Meeting with business partners
+
+Note deleted!
+
+Before the event note "Go to the cinema" remains: 29 day(s), 17 hour(s) and 27 minute(s).</code></pre>
+<p><strong>Example # 3:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-15 20:33
+
+Before the event note "Meeting with business partners" remained: 25 days, 17 hours and 27 minutes.
+Let's change several notes in the calendar.
+How much notes do you want to add or delete? (enter a positive number to add, or negative to remove)
+&gt; 0
+
+Before the event note "Go to the cinema" remains: 29 day(s), 17 hour(s) and 27 minute(s).</code></pre>

@@ -1,0 +1,113 @@
+<h5 id="description">Description</h5>
+<p>It may happen that you do not have time or forget to wish some of your friends a happy birthday. Social networks help you a lot in this! They have functionality that reminds you of your friend's birthdays. Let's try to teach your calendar to do something similar.</p>
+<p>Your calendar is already pretty good at working with notes, and that's great! Teach your program to save the dates of birthdays of your friends, acquaintances, and relatives, and it will remind you of these dates!</p>
+<p>Please note that the events in the files are removed before each test run for the tests to work correctly.</p>
+<h5 id="objectives">Objectives</h5>
+<p>Let's improve the program! After updating the notes of the calendar, ask for birthdays. Similarly to dates, you can add or delete birthdays. To do this, you first ask the user to enter the person's name, and then his date of birth. After this, you will also print in birthday notifications how old the person would be.</p>
+<ol>
+<li>Display all current notes after displaying the current date and time. If no current notes, you may skip this step.</li>
+<li>Ask the user how many notes they want to add or delete. Then you read the number. A positive number means that the user wants to add several notes, and negative means that the user decides to delete that many notes.</li>
+<li>To add notes, read data and text and save the result in a file.</li>
+<li>To delete a note, ask the user to enter the text of the note and remove information from your file. If such a note is not found, you need to print an error message and ask again</li>
+<li>Ask the user how many birthdays they want to add or delete. Then you read the number. A positive number means that the user wants to add several birthdays, and a negative one means that the user decides to delete that many birthdays.</li>
+<li>To add birthdays, read the name and birth date and save the result in a file.</li>
+<li>To delete birthdays, ask the user to enter the name and remove information from your file. If such a person is not found, you need to print an error message and ask again</li>
+<li>In the end, print all saved notes and birthdays</li>
+</ol>
+<p>Hint: you cannot save the birthday date that will be in the future. Also, you can use two different files for birthdays and events, it's up to you!</p>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 20:33
+
+Let's change several notes in the calendar.
+How many notes do you want to add or delete? (enter a positive number to add or a negative to remove)
+&gt; 2
+
+Enter date and time of note #1 (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-20 18:00
+Enter text of note #1:
+&gt; Visit a doctor
+
+Enter date and time of note #2 (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-10 14:00
+Enter text of note #2:
+&gt; Meeting with business partners   
+
+Notes added!
+
+Let's change several dates of birth in the calendar.
+How many dates of birth do you want to add or delete? (enter a positive number to add or a negative to remove)
+&gt; 2
+
+Enter the name of #1:
+&gt; Jane Smith
+Enter the date of birth of #1 (in format «YYYY-MM-DD»):
+1990-05-13
+
+Enter the name of #2:
+&gt; David Baker
+Enter the date of birth of #2 (in format «YYYY-MM-DD»):
+1995-10-20
+
+Birthdates added!
+
+Before the event note "Meeting with business partners" remains: 27 days, 17 hours and 27 minutes.
+Before the event note "Visit a doctor" remains: 37 days, 21 hours and 26 minutes.
+
+Jane Smith’s birthday is today. He (she) turns 30 years old.
+David Baker’s birthday is in 159 days. He (she) turns 25 years old.</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 21:33
+
+Before the event note "Meeting with business partners" remains: 27 days, 16 hours and 27 minutes.
+Before the event note "Visit a doctor" remains: 37 days, 20 hours and 26 minutes.
+
+Jane Smith’s birthday is today. He (she) turns 30 years old.
+David Baker’s birthday is in 159 days. He (she) turns 25 years old.
+
+Let's change several notes in the calendar.
+How many notes do you want to add or delete? (enter a positive number to add, or a negative to remove)
+&gt; -1
+
+Enter the text of the note you want to delete:
+&gt; Go to the gym
+No notes with such text were found. Try again:
+&gt; Visit a doctor
+
+Note deleted!  
+   
+Let's change several dates of birth in the calendar.
+How many dates of birth do you want to add or delete? (enter a positive number to add, or a negative to remove)
+&gt; -1
+
+Enter the name of the person whose date of birthday you want to delete:
+&gt; Kate Smith
+No such person found. Try again:
+&gt; Jane Smith
+
+Birthdate deleted!
+
+Before the event note "Meeting with business partners" remained: 27 days, 16 hours and 27 minutes.
+
+David Baker’s birthday is in 159 days. He (she) turns 25 years old.</code></pre>
+<p><strong>Example 3:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-14 21:33
+
+Before the event note "Meeting with business partners" remains: 26 days, 16 hours and 27 minutes.
+
+David Baker’s birthday is in 158 days. He (she) turns 25 years old.
+
+Let's change several notes in the calendar.
+How many notes do you want to add or delete? (enter a positive number to add, or a negative to remove)
+&gt; 0
+
+Let's change several dates of birth in the calendar.
+How many dates of birth do you want to add or delete? (enter a positive number to add, or a negative to remove)
+&gt; 0
+
+Before the event note "Meeting with business partners" remained: 26 days, 16 hours and 27 minutes.
+
+David Baker’s birthday is in 158 days. He (she) turns 25 years old.</code></pre>

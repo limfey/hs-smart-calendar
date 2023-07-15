@@ -1,0 +1,10 @@
+type: framework
+content:
+- What time is it?
+- Let's make a first note_
+- Save our progress_
+- What am I doing wrong?
+- Add a lot, remove a little.
+- Happy birthday_
+- Making a good UI.
+current_task: 1

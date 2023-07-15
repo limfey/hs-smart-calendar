@@ -1,0 +1,180 @@
+type: edu
+files:
+- name: task.py
+  visible: true
+  text: |
+    print('Hello!')
+  learner_created: false
+- name: test/__init__.py
+  visible: false
+  learner_created: false
+- name: test/tests.py
+  visible: false
+  text: |+
+    from hstest import StageTest, TestedProgram, dynamic_test, WrongAnswer, TestPassed
+    import datetime
+    import os
+
+    class CalendarTest(StageTest):
+        @dynamic_test
+        def test_add(self):
+            pr = TestedProgram()
+            curr_path = os.getcwd()
+            files = os.listdir(curr_path)
+            for file in files:
+                if file.endswith(".txt"):
+                    file_path = curr_path + '/' + file
+                    text = open(file_path, 'w')
+                    text.close()
+            output = pr.start().lower()
+            date = datetime.datetime.now()
+            date_str = str(date)
+            date_str = date_str[:-11]
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date_str not in output:
+                raise WrongAnswer("It's not current date and time.")
+            elif "let's change several notes in the calendar" not in output:
+                raise WrongAnswer("Your program should print: 'Let's change several notes in the calendar'")
+            elif "how many notes do you want to add or delete? (enter a positive number to add or a negative to remove)" not in output:
+                raise WrongAnswer("Your program should print: 'How many notes do you want to add or delete? (enter a positive number to add or a negative to remove)'")
+            output_first_note = pr.execute('3').lower()
+            if "enter date and time of note #1 (in format «yyyy-mm-dd hh:mm»):" not in output_first_note:
+                raise WrongAnswer("Your program should ask date and time of first note")
+            first_date = date + datetime.timedelta(days=100)
+            f_date = str(first_date)
+            f_date = f_date[:-10]
+            note_output = pr.execute(f_date).lower()
+            if "enter text of note #1" not in note_output:
+                raise WrongAnswer("Your program should print: 'Enter text of note #1'")
+            first_note = 'Buy a birthday present for John'
+            output_sec_note = pr.execute(first_note).lower()
+            if "enter date and time of note #2 (in format «yyyy-mm-dd hh:mm»):" not in output_sec_note:
+                raise WrongAnswer("Your program should ask date and time of first note")
+            second_date = date + datetime.timedelta(days=5)
+            s_date = str(second_date)
+            s_date = s_date[:-10]
+            output_sec_date = pr.execute(s_date).lower()
+            if "enter text of note #2" not in output_sec_date:
+                raise WrongAnswer("Your program should print: 'Enter text of note #2'")
+            second_note = 'Visit a doctor'
+            third_output = pr.execute(second_note).lower()
+            if "enter date and time of note #3 (in format «yyyy-mm-dd hh:mm»):" not in third_output:
+                raise WrongAnswer("Your program should ask date and time of third note")
+            third_date = date + datetime.timedelta(hours=2)
+            t_date = str(third_date)
+            t_date = t_date[:-10]
+            third_note_output = pr.execute(t_date).lower()
+            if "enter text of note #3" not in third_note_output:
+                raise WrongAnswer("Your program should print: 'Enter text of note #3'")
+            third_note = 'Go to the gym'
+            final_output = pr.execute(third_note).lower()
+            if 'notes added' not in final_output:
+                raise WrongAnswer("Your program should print 'Notes added!'")
+            elif 'before the event note' not in final_output:
+                raise WrongAnswer("Your program should print 'Before the event note...'")
+            elif 'buy a birthday present for john' not in final_output:
+                raise WrongAnswer("Your program should print the first note")
+            elif '99 day(s)' not in final_output:
+                raise WrongAnswer("Wrong number of days of first note")
+            elif '23 hour(s)' not in final_output:
+                raise WrongAnswer("Wrong number of hours of first note")
+            elif '59 minute(s)' not in final_output:
+                raise WrongAnswer("Wrong number of hours of first note")
+            elif 'visit a doctor' not in final_output:
+                raise WrongAnswer("Your program should print the second note")
+            elif '4 day(s)' not in final_output:
+                raise WrongAnswer("Wrong number of days of second note")
+            elif 'go to the gym' not in final_output:
+                raise WrongAnswer("Your program should print the first note")
+            elif '0 day(s)' not in final_output:
+                raise WrongAnswer("Wrong number of days of third note")
+            elif '1 hour(s)' not in final_output:
+                raise WrongAnswer("Wrong number of hours of third note")
+            else:
+                raise TestPassed()
+
+        @dynamic_test
+        def test_remove(self):
+            pr = TestedProgram()
+            output = pr.start().lower()
+            date = datetime.datetime.now()
+            date_str = str(date)
+            date_str = date_str[:-11]
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date_str not in output:
+                raise WrongAnswer("It's not current date and time.")
+            elif "let's change several notes in the calendar" not in output:
+                raise WrongAnswer("Your program should print: 'Let's change several notes in the calendar'")
+            elif "buy a birthday present for john" not in output:
+                raise WrongAnswer("The note 'Buy a birthday present for John' should be printed")
+            elif "99 day(s), 23 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Buy a birthday present for John' is incorrect")
+            elif "visit a doctor" not in output:
+                raise WrongAnswer("The note 'Visit a doctor' should be printed")
+            elif "4 day(s), 23 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Visit a doctor' is incorrect")
+            elif "go to the gym" not in output:
+                raise WrongAnswer("The note 'Go to the gym' should be printed")
+            elif "0 day(s), 1 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Go to the gym' is incorrect")
+            second_output = pr.execute('-2').lower()
+            if 'enter the text of the note you want to delete' not in second_output:
+                raise WrongAnswer("Your program should print 'Enter the text of the note you want to delete'")
+            wrong_note = 'Meeting with business partners'
+            wrong_output = pr.execute(wrong_note).lower()
+            if 'no notes with such text were found. try again' not in wrong_output:
+                raise WrongAnswer("Your program should print 'No notes with such text were found. Try again'")
+            first_note = 'Buy a birthday present for John'
+            first_rem_output = pr.execute(first_note).lower()
+            if 'note deleted' not in first_rem_output:
+                raise WrongAnswer("Your program should print 'Note deleted!'")
+            second_note = 'Go to the gym'
+            second_rem_output = pr.execute(second_note).lower()
+            if 'note deleted' not in second_rem_output:
+                raise WrongAnswer("Your program should print 'Note deleted!'")
+            elif "visit a doctor" not in second_rem_output:
+                raise WrongAnswer("The note 'Visit a doctor' should be printed")
+            elif "4 day(s), 23 hour(s)" not in second_rem_output:
+                raise WrongAnswer("The time for the note 'Visit a doctor' is incorrect")
+            else:
+                raise TestPassed()
+
+        @dynamic_test
+        def test_null(self):
+            pr = TestedProgram()
+            output = pr.start().lower()
+            date = datetime.datetime.now()
+            date_str = str(date)
+            date_str = date_str[:-11]
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date_str not in output:
+                raise WrongAnswer("It's not current date and time.")
+            elif "visit a doctor" not in output:
+                raise WrongAnswer("The note 'Visit a doctor' should be printed")
+            elif "4 day(s), 23 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Visit a doctor' is incorrect")
+            elif "let's change several notes in the calendar" not in output:
+                raise WrongAnswer("Your program should print: 'Let's change several notes in the calendar'")
+            second_output = pr.execute('0').lower()
+            if "visit a doctor" not in second_output:
+                raise WrongAnswer("The note 'Visit a doctor' should be printed")
+            elif "4 day(s), 23 hour(s)" not in second_output:
+                raise WrongAnswer("The time for the note 'Visit a doctor' is incorrect")
+            else:
+                raise TestPassed()
+
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from test.tests import CalendarTest
+
+    if __name__ == '__main__':
+        CalendarTest().run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/355/stages/2085/implement#comment
+status: Unchecked
+record: -1

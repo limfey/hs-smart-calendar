@@ -1,0 +1,276 @@
+type: edu
+custom_name: Happy birthday!
+files:
+- name: task.py
+  visible: true
+  text: |
+    print('Hello!')
+  learner_created: false
+- name: test/__init__.py
+  visible: false
+  learner_created: false
+- name: test/tests.py
+  visible: false
+  text: |
+    from hstest import StageTest, TestedProgram, dynamic_test, WrongAnswer, TestPassed
+    import datetime
+    import os
+
+    class CalendarTest(StageTest):
+        @dynamic_test
+        def test_add(self):
+            pr = TestedProgram()
+            curr_path = os.getcwd()
+            files = os.listdir(curr_path)
+            for file in files:
+                if file.endswith(".txt"):
+                    file_path = curr_path + '/' + file
+                    text = open(file_path, 'w')
+                    text.close()
+            output = pr.start().lower()
+            date = datetime.datetime.now()
+            date_str = str(date)
+            date_str = date_str[:-11]
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date_str not in output:
+                raise WrongAnswer("It's not current date and time.")
+            elif "let's change several notes in the calendar" not in output:
+                raise WrongAnswer("Your program should print: 'Let's change several notes in the calendar'")
+            elif "how many notes do you want to add or delete? (enter a positive number to add or a negative to remove)" not in output:
+                raise WrongAnswer("Your program should print: 'How many notes do you want to add or delete? (enter a positive number to add or a negative to remove)'")
+            output_first_note = pr.execute('2').lower()
+            if "enter date and time of note #1 (in format «yyyy-mm-dd hh:mm»):" not in output_first_note:
+                raise WrongAnswer("Your program should ask date and time of first note")
+            first_date = date + datetime.timedelta(days=7)
+            f_date = str(first_date)
+            f_date = f_date[:-10]
+            note_output = pr.execute(f_date).lower()
+            if "enter text of note #1" not in note_output:
+                raise WrongAnswer("Your program should print: 'Enter text of note #1'")
+            first_note = 'Shopping'
+            output_sec_note = pr.execute(first_note).lower()
+            if "enter date and time of note #2 (in format «yyyy-mm-dd hh:mm»):" not in output_sec_note:
+                raise WrongAnswer("Your program should ask date and time of first note")
+            second_date = date + datetime.timedelta(days=5)
+            s_date = str(second_date)
+            s_date = s_date[:-10]
+            output_sec_date = pr.execute(s_date).lower()
+            if "enter text of note #2" not in output_sec_date:
+                raise WrongAnswer("Your program should print: 'Enter text of note #2'")
+            second_note = 'Visit granny'
+            third_output = pr.execute(second_note).lower()
+            if 'notes added' not in third_output:
+                raise WrongAnswer("Your program should print 'Notes added!'")
+            elif "let's change several dates of birth in the calendar" not in third_output:
+                raise WrongAnswer("Your program should print 'Let's change several dates of birth in the calendar.'")
+            elif "how many dates of birth do you want to add or delete? (enter a positive number to add or a negative to remove)" not in third_output:
+                raise WrongAnswer("Your program should print 'How many dates of birth do you want to add or delete? (enter a positive number to add or a negative to remove)'")
+            fnb_output  =  pr.execute('3').lower()
+            if "enter the name of #1" not in fnb_output:
+                raise WrongAnswer("Your program should print: 'Enter the name of #1'")
+            fdb_output = pr.execute('Jane Smith').lower()
+            if "enter the date of birth of #1 (in format «yyyy-mm-dd»)" not in fdb_output:
+                raise WrongAnswer("Your program should print: 'Enter the date of birth of #1 (in format «YYYY-MM-DD»)'")
+            current_date = datetime.date.today()
+            f_year = date.year - 30
+            today_birthday = datetime.date(f_year, current_date.month, current_date.day)
+            t_birthday = str(today_birthday)
+            snb_output = pr.execute(t_birthday).lower()
+            if "enter the name of #2" not in snb_output:
+                raise WrongAnswer("Your program should print: 'Enter the name of #2'")
+            sdb_output = pr.execute('David Baker').lower()
+            if "enter the date of birth of #2 (in format «yyyy-mm-dd»)" not in sdb_output:
+                raise WrongAnswer("Your program should print: 'Enter the date of birth of #2 (in format «YYYY-MM-DD»)'")
+            second_birthday = current_date - datetime.timedelta(days=13134)
+            s_birthday = str(second_birthday)
+            tnb_output = pr.execute(s_birthday).lower()
+            if "enter the name of #3" not in tnb_output:
+                raise WrongAnswer("Your program should print: 'Enter the name of #3'")
+            tdb_output = pr.execute('Lisa Brown').lower()
+            if "enter the date of birth of #3 (in format «yyyy-mm-dd»):" not in tdb_output:
+                raise WrongAnswer("Your program should print: 'Enter the date of birth of #3 (in format «YYYY-MM-DD»):'")
+            third_birthday = current_date - datetime.timedelta(days=10250)
+            t_birthday = str(third_birthday)
+            final_output = pr.execute(t_birthday).lower()
+            sec_brth_fut = datetime.date(current_date.year, second_birthday.month, second_birthday.day)
+            sec_days_left = (sec_brth_fut - current_date).days
+            third_brth_fut = datetime.date(current_date.year + 1, third_birthday.month, third_birthday.day)
+            third_days_left = (third_brth_fut - current_date).days
+            second_phrase = 'in ' + str(sec_days_left) + ' days'
+            third_phrase = 'in ' + str(third_days_left) + ' days'
+            if 'birthdates added' not in final_output:
+                raise WrongAnswer("Your program should print 'Birthdates added'")
+            elif 'before the event note' not in final_output:
+                raise WrongAnswer("Your program should print 'Before the event note...'")
+            elif 'shopping' not in final_output:
+                raise WrongAnswer("Your program should print the first note")
+            elif '4 day(s)' not in final_output:
+                raise WrongAnswer("Wrong number of days of first note")
+            elif '23 hour(s)' not in final_output:
+                raise WrongAnswer("Wrong number of hours of first note")
+            elif '59 minute(s)' not in final_output:
+                raise WrongAnswer("Wrong number of hours of first note")
+            elif 'visit granny' not in final_output:
+                raise WrongAnswer("Your program should print the second note")
+            elif '4 day(s)' not in final_output:
+                raise WrongAnswer("Wrong number of days of second note")
+            elif 'jane smith' not in final_output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif 'today' not in final_output:
+                raise WrongAnswer("Incorrect number of days until Jane Smith's birthday")
+            elif '30 years old' not in final_output:
+                raise WrongAnswer("Incorrect age of the person")
+            elif 'david baker' not in final_output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif second_phrase not in final_output:
+                raise WrongAnswer("Incorrect number of days until David Baker's birthday")
+            elif '36 years old' not in final_output:
+                raise WrongAnswer("Incorrect age of the person")
+            elif 'lisa brown' not in final_output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif third_phrase not in final_output:
+                raise WrongAnswer("Incorrect number of days until Lisa Brown's birthday")
+            elif '29 years old' not in final_output:
+                raise WrongAnswer("Incorrect age of the person")
+            else:
+                raise TestPassed()
+
+        @dynamic_test
+        def test_remove(self):
+            pr = TestedProgram()
+            output = pr.start().lower()
+            date = datetime.datetime.now()
+            date_str = str(date)
+            date_str = date_str[:-11]
+            current_date = datetime.date.today()
+            second_birthday = current_date - datetime.timedelta(days=13134)
+            third_birthday = current_date - datetime.timedelta(days=10250)
+            sec_brth_fut = datetime.date(current_date.year, second_birthday.month, second_birthday.day)
+            sec_days_left = (sec_brth_fut - current_date).days
+            third_brth_fut = datetime.date(current_date.year + 1, third_birthday.month, third_birthday.day)
+            third_days_left = (third_brth_fut - current_date).days
+            second_phrase = 'in ' + str(sec_days_left) + ' days'
+            third_phrase = 'in ' + str(third_days_left) + ' days'
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date_str not in output:
+                raise WrongAnswer("It's not current date and time.")
+            elif "shopping" not in output:
+                raise WrongAnswer("The note 'Shopping' should be printed")
+            elif "6 day(s), 23 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Shopping' is incorrect")
+            elif "visit granny" not in output:
+                raise WrongAnswer("The note 'Visit granny' should be printed")
+            elif "4 day(s), 23 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Visit a doctor' is incorrect")
+            elif 'jane smith' not in output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif 'today' not in output:
+                raise WrongAnswer("Incorrect number of days until Jane Smith's birthday")
+            elif '30 years old' not in output:
+                raise WrongAnswer("Incorrect age of the person")
+            elif 'david baker' not in output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif second_phrase not in output:
+                raise WrongAnswer("Incorrect number of days until David Baker's birthday")
+            elif '36 years old' not in output:
+                raise WrongAnswer("Incorrect age of the person")
+            elif 'lisa brown' not in output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif third_phrase not in output:
+                raise WrongAnswer("Incorrect number of days until Lisa Brown's birthday")
+            elif '29 years old' not in output:
+                raise WrongAnswer("Incorrect age of the person")
+            elif "let's change several notes in the calendar" not in output:
+                raise WrongAnswer("Your program should print: 'Let's change several notes in the calendar'")
+            second_output = pr.execute('-1').lower()
+            if 'enter the text of the note you want to delete' not in second_output:
+                raise WrongAnswer("Your program should print 'Enter the text of the note you want to delete'")
+            first_note = 'Visit granny'
+            first_rem_output = pr.execute(first_note).lower()
+            if 'note deleted' not in first_rem_output:
+                raise WrongAnswer("Your program should print 'Note deleted!'")
+            elif "let's change several dates of birth in the calendar" not in first_rem_output:
+                raise WrongAnswer("Your program should print 'Let's change several dates of birth in the calendar'")
+            elif "how many dates of birth do you want to add or delete? (enter a positive number to add or a negative to remove)" not in first_rem_output:
+                raise WrongAnswer("Your program should print 'How many dates of birth do you want to add or delete? (enter a positive number to add or a negative to remove)'")
+            bthd_rem_output = pr.execute('-2').lower()
+            if "enter the name of the person whose date of birthday you want to delete" not in bthd_rem_output:
+                raise WrongAnswer(
+                    "Your program should print 'Enter the name of the person whose date of birthday you want to delete'")
+            wrong_rem_output = pr.execute('Harry Potter').lower()
+            if "no such person found. try again" not in wrong_rem_output:
+                raise WrongAnswer(
+                    "Your program should print 'No such person found. Try again:'")
+            fb_rem_output = pr.execute('David Baker').lower()
+            final_output = pr.execute('Lisa Brown').lower()
+            if "birthdate deleted" not in final_output:
+                raise WrongAnswer(
+                    "Your program should print 'Birthdate deleted!'")
+            elif "shopping" not in output:
+                raise WrongAnswer("The note 'Shopping' should be printed")
+            elif "6 day(s), 23 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Shopping' is incorrect")
+            elif 'jane smith' not in output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif 'today' not in output:
+                raise WrongAnswer("Incorrect number of days until Jane Smith's birthday")
+            elif '30 years old' not in output:
+                raise WrongAnswer("Incorrect age of the person")
+            else:
+                raise TestPassed()
+
+        @dynamic_test
+        def test_null(self):
+            pr = TestedProgram()
+            output = pr.start().lower()
+            date = datetime.datetime.now()
+            date_str = str(date)
+            date_str = date_str[:-11]
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date_str not in output:
+                raise WrongAnswer("It's not current date and time.")
+            elif "shopping" not in output:
+                raise WrongAnswer("The note 'Shopping' should be printed")
+            elif "6 day(s), 23 hour(s)" not in output:
+                raise WrongAnswer("The time for the note 'Shopping' is incorrect")
+            elif 'jane smith' not in output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif 'today' not in output:
+                raise WrongAnswer("Incorrect number of days until Jane Smith's birthday")
+            elif '30 years old' not in output:
+                raise WrongAnswer("Incorrect age of the person")
+            elif "let's change several notes in the calendar" not in output:
+                raise WrongAnswer("Your program should print: 'Let's change several notes in the calendar'")
+            second_output = pr.execute('0').lower()
+            if "let's change several dates of birth in the calendar" not in second_output:
+                raise WrongAnswer("Your program should print 'Let's change several dates of birth in the calendar'")
+            elif "how many dates of birth do you want to add or delete? (enter a positive number to add or a negative to remove)" not in second_output:
+                raise WrongAnswer("Your program should print 'How many dates of birth do you want to add or delete? (enter a positive number to add or a negative to remove)'")
+            third_output = pr.execute('0').lower()
+            if "shopping" not in third_output:
+                raise WrongAnswer("The note 'Shopping' should be printed")
+            elif "6 day(s), 23 hour(s)" not in third_output:
+                raise WrongAnswer("The time for the note 'Shopping' is incorrect")
+            elif 'jane smith' not in third_output:
+                raise WrongAnswer("Your program should print the name of the person who will have a birthday")
+            elif 'today' not in third_output:
+                raise WrongAnswer("Incorrect number of days until Jane Smith's birthday")
+            elif '30 years old' not in third_output:
+                raise WrongAnswer("Incorrect age of the person")
+            else:
+                raise TestPassed()
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from test.tests import CalendarTest
+
+    if __name__ == '__main__':
+        CalendarTest().run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/355/stages/2086/implement#comment
+status: Unchecked
+record: -1

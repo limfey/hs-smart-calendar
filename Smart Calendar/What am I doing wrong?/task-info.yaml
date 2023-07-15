@@ -1,0 +1,90 @@
+type: edu
+files:
+- name: task.py
+  visible: true
+  text: |
+    print('Hello!')
+  learner_created: false
+- name: test/__init__.py
+  visible: false
+  learner_created: false
+- name: test/tests.py
+  visible: false
+  text: |
+    from hstest import StageTest, TestedProgram, dynamic_test, WrongAnswer, TestPassed
+    import datetime
+    import os
+
+    class CalendarTest(StageTest):
+        @dynamic_test
+        def test_errors(self):
+            pr = TestedProgram()
+            curr_path = os.getcwd()
+            files = os.listdir(curr_path)
+            for file in files:
+                if file.endswith(".txt"):
+                    file_path = curr_path + '/' + file
+                    text = open(file_path, 'w')
+                    text.close()
+            output = pr.start().lower()
+            date = datetime.datetime.now()
+            date_str = str(date)
+            date_str = date_str[:-11]
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date_str not in output:
+                raise WrongAnswer("It's not current date and time.")
+            elif "let's add a note to the calendar" not in output:
+                raise WrongAnswer("Your program should print: 'Let's add a note to the calendar'")
+            elif "enter date and time (in format «yyyy-mm-dd hh:mm»)" not in output:
+                raise WrongAnswer("Your program should print: 'Enter date and time (in format «YYYY-MM-DD HH:MM»)'")
+            wrong_format = pr.execute('2024-11-15 12.00').lower()
+            if "incorrect format. please try again (use the format «yyyy-mm-dd hh:mm»)" not in wrong_format:
+                raise WrongAnswer("The date is in the wrong format, so your program should display a message about it")
+            wrong_format_two = pr.execute('2024-11-15 12:zerooooo').lower()
+            if "incorrect format. please try again (use the format «yyyy-mm-dd hh:mm" not in wrong_format_two:
+                raise WrongAnswer("The date is in the wrong format, so your program should display a message about it")
+            wrong_format_three = pr.execute('2024-111-15 12.10').lower()
+            if "incorrect format. please try again (use the format «yyyy-mm-dd hh:mm" not in wrong_format_three:
+                raise WrongAnswer("The date is in the wrong format, so your program should display a message about it")
+            wrong_month = pr.execute('2024-15-15 12:11').lower()
+            if "incorrect month value. the month should be in 1-12" not in wrong_month:
+                raise WrongAnswer("The month is out of range, so your program should display a message about it")
+            wrong_hour = pr.execute('2024-10-15 28:11').lower()
+            if "incorrect hour value. the hour should be in 00-23" not in wrong_hour:
+                raise WrongAnswer("The hour is out of range, so your program should display a message about it")
+            wrong_minute = pr.execute('2024-10-15 20:89').lower()
+            if "incorrect minute value. the minutes should be in 00-59" not in wrong_minute:
+                raise WrongAnswer("The minutes are out of range, so your program should display a message about it")
+            correct_date = date + datetime.timedelta(days=100)
+            corr_date = str(correct_date)
+            corr_date = corr_date[:-10]
+            note_output = pr.execute(corr_date).lower()
+            if "enter a text" not in note_output:
+                raise WrongAnswer("Your program should print: 'Enter a text'")
+            note = 'Buy a birthday present for John'
+            final_output = pr.execute(note).lower()
+            if 'before the event note' not in final_output:
+                raise WrongAnswer("Your program should print: 'Before the event note...'")
+            elif 'buy a birthday present for john' not in final_output:
+                raise WrongAnswer("Your program should print the note")
+            elif '99 day(s)' not in final_output:
+                raise WrongAnswer("Wrong number of days")
+            elif '23 hour(s)' not in final_output:
+                raise WrongAnswer("Wrong number of hours")
+            elif '59 minute(s)' not in final_output:
+                raise WrongAnswer("Wrong number of hours")
+            else:
+                raise TestPassed()
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from test.tests import CalendarTest
+
+    if __name__ == '__main__':
+        CalendarTest().run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/355/stages/2084/implement#comment
+status: Unchecked
+record: -1

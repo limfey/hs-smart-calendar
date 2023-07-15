@@ -1,0 +1,45 @@
+type: edu
+files:
+- name: test/__init__.py
+  visible: false
+  learner_created: false
+- name: test/tests.py
+  visible: false
+  text: |+
+    from hstest import StageTest, TestedProgram, dynamic_test, WrongAnswer, TestPassed
+    import datetime
+
+    class CalendarTest(StageTest):
+        @dynamic_test
+        def test_now(self):
+            pr = TestedProgram()
+            output = pr.start().lower()
+            date = str(datetime.datetime.now())
+            date = date[:-11]
+            if 'current date and time' not in output:
+                raise WrongAnswer("Your program should print: 'Current date and time:'")
+            elif date not in output:
+                raise WrongAnswer("It's not current date and time.")
+            else:
+                raise TestPassed()
+
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from test.tests import CalendarTest
+
+    if __name__ == '__main__':
+        CalendarTest().run_tests()
+  learner_created: false
+- name: task.py
+  visible: true
+  text: |
+    print('Hello!')
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/355/stages/2081/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Tue, 20 Jun 2023 21:56:15 UTC
+record: 1

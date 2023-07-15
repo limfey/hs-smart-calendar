@@ -1,0 +1,153 @@
+<h5 id="description">Description</h5>
+<p>The main functionality of the calendar is ready. However, with a large number of entries, this program looks cumbersome and awkward. It lacks a competent user interface! Therefore, at the final stage of the project, this interface must be implemented.</p>
+<p>Let's define the initial behavior of the program: Let it display not only the current date and time but also all the notes, as well as the dates of birth corresponding to the present day. Next, let the program wait for user input.</p>
+<p>Please note that the events in the files are removed before each test run for the tests to work correctly.</p>
+<h5 id="objectives">Objectives</h5>
+<p>In this task, your program should print the current date and time as before, print a message <code class="java">Enter the command (add, view, delete, exit)</code>  and get input. if the user wrote a command that is not in the proposed menu, then you need to write <code class="java">This command is not in the menu</code> and print the start message again. </p>
+<p>If the user writes <code class="java">add</code>, the program should ask what to add by a message <code class="java">What do you want to add (note, birthday)?</code>. Next, the subroutine for adding a record is started.</p>
+<ul>
+<li>If the user chooses <code class="java">note</code>, your program should print <code class="java">How many notes do you want to add?</code> and add as many notes to the file as the user specified, before.</li>
+<li>If the user chooses<code class="java">birthday</code>, your program should print <code class="java">How many dates of birth do you want to add?</code> and add as many dates of birth to the file as the user specified, before.</li>
+</ul>
+<p>If the user writes <code class="java">view</code>, the program should print a message <code class="java">What do you want to view (date, note, name)?</code> and get a command:</p>
+<ul>
+<li><code class="java">date</code>: print <code class="java">Enter date (in format «YYYY-MM-DD»):</code>, get a date, print <code class="java">Found (number of notes) note(s) and (number of notes) date(s) of birth on this date:</code> and print the corresponding notes, dates of birth, and the number of days before these events as before.</li>
+<li><code class="java">name</code>: display the person's date of birth by name as before. If such a person is not found, print <code class="java">No such person found. Try again:</code> and get the text again.</li>
+<li><code class="java">note</code>: your program should print <code class="java">Enter text of note:</code> and display a note if a user-written substring is found in a note (for example, View note <code class="java">Doctor</code> should find all notes where the text contains Doctor's substring). If such text is not found, print <code class="java">No such note found. Try again:</code> and get the text again.</li>
+</ul>
+<p>If a user writes <code class="java">delete</code>, the program should ask <code class="java">What do you want to delete (date, note, name)?</code>, get input, and show the found notes or the dates of birth as in the <code class="java">view</code> command. Then your program should ask for confirmation before deletion of every single note or date of birth:  <code class="java">Are you sure you want to delete</code> and show the corresponding note or the name of the person. If the user writes <code class="java">yes</code>, your program should delete the found information. If the user writes <code class="java">no</code>, your program print <code class="java">Deletion canceled.</code> After deleting the note or the date of birth, your program should print the message <code class="java">Note deleted!</code> or <code class="java">Birthdate deleted!</code> correspondingly.</p>
+<p>After completing the actions, your program should return to the main menu and repeat the entire algorithm again. If the user writes <code class="java">exit</code>, then the program should finish receiving commands and executing them.</p>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 21:33
+
+Enter the command (add, view, delete, exit):
+&gt; add
+
+What do you want to add (note, birthday)?
+&gt; note
+
+How many notes do you want to add?
+&gt; 2
+
+Enter date and time of note #1 (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-20 18:00
+Enter text of note #1:
+&gt; Visit a doctor
+
+Enter date and time of note #2 (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-10 14:00
+Enter text of note #2:
+&gt; Meeting with business partners
+
+Notes added!
+
+Enter the command (add, view, delete, exit):
+&gt; add
+
+What do you want to add (note, birthday)?
+&gt; birthday
+
+How many dates of birth do you want to add?
+&gt; 2
+
+Enter the name of #1:
+&gt; Jane Smith
+Enter the date of birth of #1 (in the format «YYYY-MM-DD»):
+1995-10-20
+
+Enter the name of #2:
+&gt; David Baker
+Enter the date of birth of #2 (in the format «YYYY-MM-DD»):
+1990-06-20
+
+Birthdates added!
+
+Enter the command (add, view, delete, exit):
+&gt; exit</code></pre>
+<p><strong>Example 2:</strong></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 21:33
+
+Enter the command (add, view, delete, exit):
+&gt; view
+
+What do you want to view (date, note, name)?
+&gt; date
+
+Enter date (in the format «YYYY-MM-DD»):
+&gt; 2020-06-20
+
+Found 1 note(s) and 1 date(s) of birth on this date:
+
+Before the event note "Meeting with business partners" remained: 37 days, 17 hours and 27 minutes.
+James Bond’s birthday is in 37 days. He (she) turns 35 years old.
+
+Enter the command (add, view, delete, exit):
+&gt; view
+
+What do you want to view (date, note, name)?
+&gt; name
+
+Enter name:
+&gt; Bob Brown
+
+No such person found. Try again:
+&gt; David Baker
+
+Found 1 date of birth:
+David Baker's birthday is in 159 days. He (she) turns 25 years old.
+
+Enter the command (add, view, delete, exit):
+&gt; exit</code></pre>
+<p><strong>Example 3:</strong> </p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 14:33
+
+Enter the command (add, view, delete, exit):
+&gt; delete
+
+What do you want to delete (date, note, name)?
+&gt; date
+
+Enter date (in the format «YYYY-MM-DD»):
+&gt; 2020-05-13
+
+Found 1 note and 1 dates of birth on this date:
+
+Before the event note "Go to the gym" remained: 0 days, 0 hours and 26 minutes.
+Jane Smith’s birthday is today. He (she) turns 30 years old.
+
+Are you sure you want to delete "Go to the gym"?
+&gt; yes
+Note deleted!
+
+Are you sure you want to delete "Jane Smith"?
+&gt; no
+Deletion canceled.
+
+Enter the command (add, view, delete, exit):
+&gt; exit
+</code></pre>
+<p><strong>Example 4:</strong> </p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 21:33
+
+Enter the command (add, view, delete, exit):
+&gt; view
+
+What do you want to view (date, note, name)?
+&gt; note
+
+Enter text of note:
+&gt; doctor
+
+Found 2 note(s) that contain "doctor":
+
+Before the event note "Visit a doctor" remained: 4 day(s), 14 hour(s) and 13 minute(s).
+Before the event note "Visit a doctor" remained: 18 day(s), 10 hour(s) and 13 minute(s).
+
+Enter the command (add, view, delete, exit):
+&gt; exit
+</code></pre>

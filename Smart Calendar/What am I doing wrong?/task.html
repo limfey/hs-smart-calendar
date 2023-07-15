@@ -1,0 +1,50 @@
+<h5 id="description">Description</h5>
+<p>Your program is getting better and better! But you may face a common programming problem — the user enters the data in an incorrect format!</p>
+<p>Let's take a simple example: a user wants to enter a note in the 13th month. But there is no month with this number! What will happen then? Your program (and any bad program) will likely crash with an exception. But you are doing a good one! To do this, ask the user to enter the date and time with one input, and try to handle the exceptions associated with this input.</p>
+<p>Please note that the events in the files are removed before each test run for the tests to work correctly.</p>
+<h5 id="objectives">Objectives</h5>
+<p>In this stage, you need to change the user interface for your program.</p>
+<ol>
+<li>Display the current date and time (in hours and minutes);</li>
+<li>Ask for the date and time of the event in the one-line format: (<code class="java">YYYY-MM-DD HH:MM</code>);</li>
+<li>If the user makes a mistake, print the corresponding message and ask the user for input again:
+	<ul>
+<li>Print <code class="java">Incorrect format. Please try again (use the format «YYYY-MM-DD HH:MM»)</code> if you can't parse the data input by the user;</li>
+<li>Print <code class="java">Incorrect month value. The month should be in 01-12.</code> if the user inputs a month out of range;</li>
+<li>Print <code class="java">Incorrect hour value. The hour should be in 00-23.</code> if the user inputs an hour out of range;</li>
+<li>Print <code class="java">Incorrect minute value. The minutes should be in 00-59.</code> if the user inputs a minute value out of range.</li>
+</ul>
+</li>
+<li>When the input is correct, ask for the text of the note.</li>
+</ol>
+<p>Then the program should display how much time is left until this note in the format:<br/>
+<code class="java">Before the event note "Text" remains: XX day(s), HH hour(s) and MM minute(s).</code></p>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1: </strong><em>the user inputs the correct data</em></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 20:33
+
+Let's add a note to the calendar.
+Enter date and time (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020-06-20 18:00
+Enter a text:
+&gt; Visit a doctor
+
+Before the event note "Visit a doctor" time remains: 37 day(s), 21 hour(s) and 26 minute(s).</code></pre>
+<p><strong>Example 2:</strong> <em>mistakes in the user input</em></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 20:33
+
+Let's add a note to the calendar.
+Enter date and time (in format «YYYY-MM-DD HH:MM»):
+&gt; 2020.08,19 19-threezero
+Incorrect format. Please try again (use the format «YYYY-MM-DD HH:MM»):
+&gt; 2020-13-19 20:00
+Incorrect month value. The month should be in 1-12.
+Please try again:
+&gt; 2020-08-19 19:30
+Enter a text:
+&gt; Go to the gym
+
+Before the event note "Visit a doctor" time remains: 37 day(s), 21 hour(s) and 26 minute(s).
+Before the event note "Go to the gym" time remains: 97 day(s), 22 hour(s) and 56 minute(s).</code></pre>

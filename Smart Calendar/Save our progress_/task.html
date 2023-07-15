@@ -1,0 +1,49 @@
+<h5 id="description">Description</h5>
+<p>Your program can create a note and even calculates the remaining time before it occurs. However, you can see that by closing and restarting the program, you need to start all over again. It can be compared with a notebook where we write something but then tear out a sheet. Let's fix it! You will teach the program to save and display your notes on the screen.</p>
+<p>Please note that the events in the files are removed before each test run for the tests to work correctly.</p>
+<h5 id="objectives">Objectives</h5>
+<p>In this stage, you need to save your events. The easiest way is to write your results to a file and then read the data from it in the next session.</p>
+<ul>
+<li>Input and output are the same as in the previous step.</li>
+<li>Save the information about your events (the text and their date and time) to the <em>notes.txt</em> file and display information about all the notes entered earlier at the end.</li>
+</ul>
+<h5 id="examples">Examples</h5>
+<p>The greater-than symbol followed by a space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input.</p>
+<p><strong>Example 1</strong>: <em>the first session</em></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 20:33:03.907875
+Let's add a note to the calendar.
+Enter year:
+&gt; 2020
+Enter month:
+&gt; 06
+Enter day:
+&gt; 20
+Enter hour:
+&gt; 18
+Enter minute:
+&gt; 00
+Enter a text:
+&gt; Visit a doctor
+Before the event note "Visit a doctor" remains:
+37 day(s), 21 hour(s) and 26 minute(s).</code></pre>
+<p><strong>Example 2</strong>: <em>the next session; the event from the first session is printed as well</em></p>
+<pre><code class="language-no-highlight">Current date and time:
+2020-05-13 20:33:03.907875
+Let's add a note to the calendar.
+Enter year:
+&gt; 2020
+Enter month:
+&gt; 08
+Enter day:
+&gt; 19
+Enter hour:
+&gt; 19
+Enter minute:
+&gt; 30
+Enter a text:
+&gt; Go to the gym
+Before the event note "Visit a doctor" remains:
+37 day(s), 21 hour(s) and 26 minute(s).
+Before the event note "Go to the gym" remains:
+97 day(s), 22 hour(s) and 55 minute(s).</code></pre>
