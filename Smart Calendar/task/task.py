@@ -7,4 +7,4 @@ fewvrvrf
 dvcdvr
 dfgdf
 
-execfdfdfdvevrvrev
+execfdfdfdvevrvrgit remote set-url origin git@github.com:OWNER/REPOSITORY.gitevdfdf
