@@ -5,3 +5,6 @@ print(date_time)
 df
 fewvrvrf
 dvcdvr
+dfgdf
+wheel
+exec
