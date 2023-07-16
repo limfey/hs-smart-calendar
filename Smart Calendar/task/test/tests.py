@@ -1,10 +1,18 @@
 from hstest import StageTest, TestedProgram, dynamic_test, WrongAnswer, TestPassed
 import datetime
+import os
 
 class CalendarTest(StageTest):
     @dynamic_test
-    def test_note(self):
+    def test_file_first(self):
         pr = TestedProgram()
+        curr_path = os.getcwd()
+        files = os.listdir(curr_path)
+        for file in files:
+            if file.endswith(".txt"):
+                file_path = curr_path + '/' + file
+                text = open(file_path, 'w')
+                text.close()
         output = pr.start().lower()
         date = datetime.datetime.now()
         date_str = str(date)
@@ -44,18 +52,70 @@ class CalendarTest(StageTest):
             raise WrongAnswer("Your program should print: 'Before the event note...'")
         elif 'visit a doctor' not in final_output:
             raise WrongAnswer("Your program should print the note")
-        elif 'day(s)' not in final_output:
-            raise WrongAnswer("Your program should print: 'day(s)', but it doesn't")
         elif '9 day(s)' not in final_output:
             raise WrongAnswer("Wrong number of days")
-        elif 'hour(s)' not in final_output:
-            raise WrongAnswer("Your program should print: 'hour(s)', but it doesn't")
         elif '23 hour(s)' not in final_output:
             raise WrongAnswer("Wrong number of hours")
-        elif 'minute(s)' not in final_output:
-            raise WrongAnswer("Your program should print: 'minute(s)', but it doesn't")
         elif '59 minute(s)' not in final_output:
-            raise WrongAnswer("Wrong number of minutes")
+            raise WrongAnswer("Wrong number of hours")
         else:
             raise TestPassed()
 
+    @dynamic_test
+    def test_file_second(self):
+        pr = TestedProgram()
+        output = pr.start().lower()
+        date = datetime.datetime.now()
+        date_str = str(date)
+        date_str = date_str[:-11]
+        if 'current date and time' not in output:
+            raise WrongAnswer("Your program should print: 'Current date and time:'")
+        elif date_str not in output:
+            raise WrongAnswer("It's not current date and time.")
+        elif "let's add a note to the calendar" not in output:
+            raise WrongAnswer("Your program should print: 'Let's add a note to the calendar'")
+        elif "enter year" not in output:
+            raise WrongAnswer("Your program should print: 'Enter year'")
+        second_note = date + datetime.timedelta(hours=3)
+        year = str(second_note.year)
+        month_output = pr.execute(year).lower()
+        if "enter month" not in month_output:
+            raise WrongAnswer("Your program should print: 'Enter month'")
+        month = str(second_note.month)
+        day_output = pr.execute(month).lower()
+        if "enter day" not in day_output:
+            raise WrongAnswer("Your program should print: 'Enter day'")
+        day = str(second_note.day)
+        hour_output = pr.execute(day).lower()
+        if "enter hour" not in hour_output:
+            raise WrongAnswer("Your program should print: 'Enter hour'")
+        hour = str(second_note.hour)
+        minute_output = pr.execute(hour).lower()
+        if "enter minute" not in minute_output:
+            raise WrongAnswer("Your program should print: 'Enter minute'")
+        minute = str(second_note.minute)
+        note_output = pr.execute(minute).lower()
+        if "enter a text" not in note_output:
+            raise WrongAnswer("Your program should print: 'Enter a text'")
+        note = 'Go to the gym'
+        final_output = pr.execute(note).lower()
+        if 'before the event note' not in final_output:
+            raise WrongAnswer("Your program should print: 'Before the event note...'")
+        elif 'visit a doctor' not in final_output:
+            raise WrongAnswer("Your program should print the first note")
+        elif '9 day(s)' not in final_output:
+            raise WrongAnswer("Wrong number of days of the first note")
+        elif '23 hour(s)' not in final_output:
+            raise WrongAnswer("Wrong number of hours of the first note")
+        elif '59 minute(s)' not in final_output and '58 minute(s)' not in final_output:
+            raise WrongAnswer("Wrong number of minutes of the first note")
+        elif 'go to the gym' not in final_output:
+            raise WrongAnswer("Your program should print the second note")
+        elif '0 day(s)' not in final_output:
+            raise WrongAnswer("Wrong number of days of the second note")
+        elif '2 hour(s)' not in final_output:
+            raise WrongAnswer("Wrong number of hours of the second note")
+        elif '59 minute(s)' not in final_output:
+            raise WrongAnswer("Wrong number of minutes of the second note")
+        else:
+            raise TestPassed()

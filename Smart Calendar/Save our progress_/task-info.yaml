@@ -142,6 +142,9 @@ files:
     if __name__ == '__main__':
         CalendarTest().run_tests()
   learner_created: false
+- name: notes.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/355/stages/2083/implement#comment
 status: Unchecked
 record: -1
