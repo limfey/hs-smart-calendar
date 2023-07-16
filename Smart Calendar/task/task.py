@@ -21,6 +21,10 @@ while True:
     delta = datetime.datetime(int(year), int(month), int(day), int(hour), int(minute)) - date_time
     days, hours, minutes = timedelta_convert(delta)
     reply = f'Before the event note "{text}" remains:\n{days} day(s), {hours} hour(s) {minutes} minute(s)'
+    f = open('notes.txt', 'r')
+    content = f. read()
+    print(content)
+    f. close()
     with open('notes.txt', 'a') as the_file:
         the_file.write(reply)
     print(reply)
